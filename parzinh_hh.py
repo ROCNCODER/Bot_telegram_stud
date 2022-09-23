@@ -8,6 +8,7 @@ import fake_useragent
 import time
 import json
 from datetime import datetime
+import pymysql
 
 ua = fake_useragent.UserAgent()
 now_date = datetime.now()
@@ -128,15 +129,114 @@ def Proverca_vremeni(tims):
 #        dad = ""
 #     return dad
 
+try:
+    connection = pymysql.connect(
+        host="92.53.124.26",
+        port=3306,
+        user="gen_user",
+        password="71alidi6z3",
+        database="default_db"    
+    )
+    print('Заебись')
+
+except Exception as ex:
+    print(ex)
+
+
+spiski_economist={
+"финансист+студент",
+"экономист+студент"
+}
+spiski_perovod_ingl={
+"переводчик+английский+студент",
+"английский+студент",
+"лингвисит+английский+студент"
+}
+spiski_perovod_nem={
+"переводчик+немецкий+студент",
+"немецкий+студент",
+"лингвисит+немецкий+студент"
+}
+spiski_perovod_fr={
+"переводчик+французский+студент",
+"французский+студент",
+"лингвисит+французкий+студент"
+}
+spiski_perovod_china={
+"переводчик+китайский+студент",
+"китайский+студент",
+"лингвисит+китайский+студент"
+}
+
+spiski_economist_sb={
+"экономисты%20студенты"
+}
+
+
+
 if __name__ == "__main__":
-        for a in get_links("финансист+студент"):
-            spisok=(get_resume(a),)
-            print(spisok)
-            time.sleep(1)
-        for a in get_links("экономист+студент"):
-            spisok=(get_resume(a),)
-            print(spisok)
-            time.sleep(1)
+        # for a in get_links("финансист+студент"):
+        #     spisok=(get_resume(a),)
+        #     print(spisok)
+        #     time.sleep(1)
+        # for a in get_links("экономист+студент"):
+        #     spisok=(get_resume(a),)
+        #     print(spisok)
+        #     time.sleep(1)
+        try:
+            for i in  spiski_economist:
+           
+                    for a in get_links(i):
+
+                        spisok=(get_resume(a))
+                        time.sleep(1)
+                        snils=str(spisok["Вакансия"])
+                        snils_one=str(spisok["Ссылка"])
+                        snils_TRY=str(spisok["Дата публикации"]) 
+                
+                        with connection.cursor() as cursor:
+                            inser_qveri=f"INSERT INTO `Vacansian_economics`(NAME,LINK,DATE,Сервис) VALUES ('{snils}','{snils_one}','{snils_TRY}','hh')"
+                            cursor.execute(inser_qveri)
+                            connection.commit()
+
+            for i in  spiski_perovod_ingl:
+           
+                    for a in get_links(i):
+
+                        spisok=(get_resume(a))
+                        time.sleep(1)
+                        snils=str(spisok["Вакансия"])
+                        snils_one=str(spisok["Ссылка"])
+                        snils_TRY=str(spisok["Дата публикации"]) 
+                
+                        with connection.cursor() as cursor:
+                            inser_qveri=f"INSERT INTO `Vacansian_economics`(NAME,LINK,DATE,Сервис) VALUES ('{snils}','{snils_one}','{snils_TRY}','hh')"
+                            cursor.execute(inser_qveri)
+                            connection.commit()
+
+            for i in  spiski_perovod_ingl:
+           
+                    for a in get_links(i):
+
+                        spisok=(get_resume(a))
+                        time.sleep(1)
+                        snils=str(spisok["Вакансия"])
+                        snils_one=str(spisok["Ссылка"])
+                        snils_TRY=str(spisok["Дата публикации"]) 
+                
+                        with connection.cursor() as cursor:
+                            inser_qveri=f"INSERT INTO `Vacansian_economics`(NAME,LINK,DATE,Сервис) VALUES ('{snils}','{snils_one}','{snils_TRY}','hh')"
+                            cursor.execute(inser_qveri)
+                            connection.commit()
+                            
+        finally:
+                connection.close()    
+                       
+
+
+
+
+
 
     
     

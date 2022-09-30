@@ -14,9 +14,9 @@ import pymysql
 
 
 
-
+global pt
 try:
-    connection = pymysql.connect(
+    pt = pymysql.connect(
         host="92.53.124.26",
         port=3306,
         user="gen_user",
@@ -29,8 +29,9 @@ try:
 
 except Exception as ex:
     print(ex)
-    
-with connection.cursor() as cursor:
+
+
+with pt.cursor() as cursor:
                     zaproz="SELECT * FROM `Vacansian_economics` "
                     cursor.execute(zaproz)
                     rows = cursor.fetchall()
@@ -49,7 +50,8 @@ with connection.cursor() as cursor:
 
                     zaproz="SELECT * FROM `Vacansian_lengvih` WHERE Язык='Нем'"
                     cursor.execute(zaproz)
-                    nem = cursor.fetchall()
+                    nev = cursor.fetchall()
+                   
 
                     zaproz="SELECT * FROM `Vacansian_lengvih` WHERE Язык='Фр'"
                     cursor.execute(zaproz)
@@ -115,14 +117,18 @@ try:
             strt = types.KeyboardButton("Перезапуск бота")
             ghf.add(nem, fran, ingl,china,strt)
             await bot.send_message(message.chat.id, "Какой твой язык?", reply_markup=ghf)
+        
+       
 
 
         if message.text == "Немецкий":
-            for row in nem:
-                        snils=str(row[1])
-                        snils_one=str(row[2])
-                        snils_TRY=str(row[3])
-                        await bot.send_message(message.chat.id,f"Вакансия:{snils}\nСсылка:{snils_one}\nДата публикации:{snils_TRY}" )     
+
+            for row in nev:
+                   snils=str(row[1])
+                   snils_one=str(row[2])
+                   snils_TRY=str(row[3])
+                   await bot.send_message(message.chat.id,f"Вакансия:{snils}\nСсылка:{snils_one}\nДата публикации:{snils_TRY}" )          
+
 
         if message.text == "Францу́зский":
             for row in Fr:
@@ -146,12 +152,12 @@ try:
                         await bot.send_message(message.chat.id,f"Вакансия:{snils}\nСсылка:{snils_one}\nДата публикации:{snils_TRY}" )              
         
 
-
+    
 
 
         
 finally:
-        connection.close()    
+        pt.close()    
             
         
         

@@ -178,8 +178,21 @@ spiski_economist_sb={
 }
 
 
-def vacansians(d,p):
-     
+def vacansians(d,p,k):
+  if k=="EN" or k=="NEM" or k=="FR" or k=="CH":
+        for i in  p:
+             for a in get_links(i):
+                     spisok=(get_resume(a))
+                     time.sleep(1)
+                     snils=str(spisok["Вакансия"])
+                     snils_one=str(spisok["Ссылка"])
+                     snils_TRY=str(spisok["Дата публикации"]) 
+
+                     with connection.cursor() as cursor:
+                          inser_qveri=f"INSERT INTO `{d}`(NAME,LINK,DATE,Сервис,Язык) VALUES ('{snils}','{snils_one}','{snils_TRY}','hh','{k}')"
+                          cursor.execute(inser_qveri)
+                          connection.commit()  
+   else:
     for i in  p:
          for a in get_links(i):
                  spisok=(get_resume(a))
@@ -189,21 +202,13 @@ def vacansians(d,p):
                  snils_TRY=str(spisok["Дата публикации"]) 
                                                 
                  with connection.cursor() as cursor:
-                      inser_qveri=f"INSERT INTO `{d}`(NAME,LINK,DATE,Сервис,Язык) VALUES ('{snils}','{snils_one}','{snils_TRY}','hh','Фр')"
-                      cursor.execute(inser_qveri)
+                      inser_qveri=f"INSERT INTO `{d}`(NAME,LINK,DATE,Сервис) VALUES ('{snils}','{snils_one}','{snils_TRY}','hh')"
+                      cursor.execute(inser_qveri)   
                       connection.commit()      
 
 if __name__ == "__main__":
-        for a in get_links("финансист+студент"):
-            spisok=(get_resume(a),)
-            print(spisok)
-            time.sleep(1)
-        for a in get_links("экономист+студент"):
-            spisok=(get_resume(a),)
-            print(spisok)
-            time.sleep(1)
-        try:
-          vacansians("Vacansian_economics",spiski_economist)
+  try:
+    vacansians("Vacansian_economics",spiski_economist)
           
           
                                  
@@ -225,3 +230,14 @@ if __name__ == "__main__":
 #link="https://hh.ru/search/vacancy?text=Python&from=suggest_post&salary=&clusters=true&area=1&ored_clusters=true&enable_snippets=true"
 #straniga_economics_one = requests.get(link).text
 #print(straniga_economics_one) 
+
+
+
+#         for a in get_links("финансист+студент"):
+#             spisok=(get_resume(a),)
+#             print(spisok)
+#             time.sleep(1)
+#         for a in get_links("экономист+студент"):
+#             spisok=(get_resume(a),)
+#             print(spisok)
+#             time.sleep(1)

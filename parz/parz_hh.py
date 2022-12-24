@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import time
-
+import pandas
 from data_bs import sql_db
 import filters
 import spisok_zaprosov
@@ -88,15 +88,28 @@ def content_rezume(mass_top_link,name_sferi,vacant):
 
 
 def main():
-    for i in spisok_zaprosov.god_spisok:
-        try:
-            sql_db.Del_table(i)
-            sql_db.sozidanie_table(i)
-        except:
-            print("OK")
-        for n in spisok_zaprosov.god_spisok[i]:
-            time.sleep(1)
-            content_rezume(list_link_vacansia(n),i,n)
+    def main():
+        for i in spisok_zaprosov.god_spisok:
+            try:
+                sql_db.Del_table(i)
+                sql_db.sozidanie_table(i)
+            except:
+                print("OK")
+            for n in spisok_zaprosov.god_spisok[i]:
+                time.sleep(1)
+                content_rezume(list_link_vacansia(n), i, n)
+
+                df = pd.DataFrame({
+                    "Ваканcия": vansian,
+                    "ссылка": links,
+                    "Заработная плата": zpd,
+                    "График": graf,
+                    "Город": sity,
+                    "Студент": mod_1,
+                    "Стажировка": mod_2
+                })
+                df.to_excel(f'./data_bs/{n}.xlsx')
+
 
 if __name__ == '__main__':
     main()

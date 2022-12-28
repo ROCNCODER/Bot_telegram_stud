@@ -2,14 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import time
-import pandas
+import pandas as pd
 from data_bs import sql_db
 import filters
 import spisok_zaprosov
 
 
 ua = UserAgent()
-
+sfer = []
+vansian = []
+links = []
+zpd = []
+graf = []
+sity = []
+mod_1 = []
+mod_2 = []
 
 def list_link_vacansia(zapros):
     date = requests.get(
@@ -77,6 +84,13 @@ def content_rezume(mass_top_link,name_sferi,vacant):
            
         
         sql_db.update(name_sferi,vacant,name_vacansian,t,zp,grafik,gorod,i[1],i[2])
+        vansian.append(name_vacansian)
+        links.append(t)
+        zpd.append(zp)
+        graf.append(grafik)
+        sity.append(gorod)
+        mod_1.append(i[1])
+        mod_2.append(i[2])
 
 
 

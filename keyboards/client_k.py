@@ -6,25 +6,23 @@ med = KeyboardButton("Медицинские профессии")
 it = KeyboardButton("IT профессии ")
 ingen = KeyboardButton("Технические\Инженерные/строительные профессии/ручной труд")
 since = KeyboardButton("Научные профессии")
-trans = KeyboardButton("Транспортные профессии")
 tvor = KeyboardButton("Творческие профессии")
-servis = KeyboardButton("Профессии сервиса (обслуживания)")
 urustick = KeyboardButton("Юридические, правоохранительны")
 nabor_sferi = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-nabor_sferi.add(econom,med,it,ingen,since,trans,tvor,servis,urustick)
+nabor_sferi.add(econom,med,it,ingen,since,tvor,urustick)
 
 
 nabor_sity=ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-mosck =   KeyboardButton("Москва и Мос область")
-spb =   KeyboardButton("Санкт-Петербург")
-sib =   KeyboardButton("Новосибирск")
-eca =   KeyboardButton("Екатеринбург")
-kaz =   KeyboardButton("Казань")
-nov =   KeyboardButton("Нижний Новгород")
-cheba =   KeyboardButton("Челябинск")
-sam =   KeyboardButton("Самара")
-perm =   KeyboardButton("Пермь")
-nabor_sity.add(mosck,spb,sib,kaz,eca,nov,cheba,sam,perm )
+mosck = KeyboardButton("Москва и Мос область")
+spb = KeyboardButton("Санкт-Петербург")
+sib = KeyboardButton("Новосибирск")
+eca = KeyboardButton("Екатеринбург")
+kaz = KeyboardButton("Казань")
+nov = KeyboardButton("Нижний Новгород")
+cheba = KeyboardButton("Челябинск")
+sam = KeyboardButton("Самара")
+perm = KeyboardButton("Пермь")
+nabor_sity.add(mosck,spb,sib,kaz,eca,nov,cheba,sam,perm)
 
 #Экономические професии 
 nabor_eco=ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
@@ -145,10 +143,6 @@ prof_trinadtcat = KeyboardButton("Флорист")
 prof_fotin = KeyboardButton("Художник")             
 nabor_tvor.add(prof_one,prof_two,prof_tree,prof_fr,prof_fi,prof_six,prof_sev,prof_ete,prof_nine,prof_ten,prof_eleven,prof_twelw ,prof_trinadtcat ,prof_fotin )       
 
-nabor_ob=ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-prof_two = KeyboardButton("Парикмахер")
-prof_tree = KeyboardButton("Повар")          
-nabor_ob.add(prof_one,prof_two,prof_tree,prof_fr,prof_fi,prof_six,prof_sev,prof_ete,prof_nine,prof_ten, prof_eleven,prof_twelw ,prof_trinadtcat )
 
 nabor_ur=ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
 mosck = KeyboardButton("Адвокат")
@@ -163,3 +157,15 @@ prof_ete = KeyboardButton("Юрисконсульт")
 prof_nine = KeyboardButton("Юрист")
 prof_ten = KeyboardButton("Таможенник")
 nabor_ur.add(prof_one,prof_two,prof_tree,prof_fr,prof_fi,prof_six,prof_sev,prof_ete,prof_nine,prof_ten )
+
+
+spis_kay={
+    "Экономические профессии":nabor_eco,
+    "Медицинские профессии":nabor_med,
+    'IT профессии':nabor_it,
+    "Технические\Инженерные/строительные профессии/ручной труд":nabor_inge,
+    "Научные профессии":nabor_sni,
+    "Творческие профессии":nabor_tvor,
+    "Юридические, правоохранительны":nabor_ur
+
+}
